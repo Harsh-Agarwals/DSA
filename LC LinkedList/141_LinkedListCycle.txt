@@ -1,0 +1,26 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        currentNode = head
+        pos = 0
+        while currentNode != None:
+            currentNode.pos = pos
+            pos+=1
+            if currentNode.next == None:
+                return False
+            if not hasattr(currentNode.next, 'pos') and currentNode.next != None:
+                currentNode.next.pos = None
+            if currentNode.next.pos and currentNode.next.pos < pos:
+                return True
+            currentNode = currentNode.next
+        return False
+        
